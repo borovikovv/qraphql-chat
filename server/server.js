@@ -35,7 +35,7 @@ app.use('/graphql', authMiddleware, apolloMiddleware(apolloServer, {
 const httpServer = createHttpServer(app);
 const wsServer = new WebSocketServer({ server: httpServer, path: '/graphql' });
 useWsServer({ schema }, wsServer);
-app.listen({ port: PORT }, () => {
+httpServer.listen({ port: PORT }, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
 });

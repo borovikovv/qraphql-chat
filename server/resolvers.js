@@ -16,14 +16,16 @@ export const resolvers = {
   Mutation: {
     addMessage: async (_root, { text }, { user }) => {
       if (!user) throw unauthorizedError();
-      const massage =  await createMessage(user, text);
+      const message =  await createMessage(user, text);
       pubSub.publish(MESSAGE_ADDED, { messageAdded: message });
       return message;
     },
   },
   Subscription: {
     messageAdded: {
-      subsctibe: () => pubSub.asyncIterator(MESSAGE_ADDED),
+      subscribe: () => {
+        return pubSub.asyncIterator(MESSAGE_ADDED);
+      }
     }
   },
 };

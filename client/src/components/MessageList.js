@@ -15,8 +15,8 @@ function MessageList({ user, messages }) {
     <div ref={containerRef} className="box" style={{ height: '50vh', overflowY: 'scroll' }}>
       <table>
         <tbody>
-          {messages.map((message) => (
-            <MessageRow key={message.id} user={user} message={message} />
+          {messages.map((message, index) => (
+            <MessageRow key={`${index}-${message.id}`} user={user} message={message} />
           ))}
         </tbody>
       </table>
